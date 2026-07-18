@@ -12,6 +12,15 @@
   const ring = btn.querySelector('.back-to-top__ring-fg');
   const RING_CIRCUMFERENCE = 119.4; // 2 * PI * r(19)
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const target = document.getElementById('services');
+  const header = document.querySelector('.site-header');
+
+  function getTargetY() {
+    if (!target) return 0;
+    const headerH = header ? header.offsetHeight : 0;
+    const rectTop = target.getBoundingClientRect().top + window.scrollY;
+    return Math.max(0, rectTop - headerH);
+  }
 
   let ticking = false;
 
@@ -52,10 +61,12 @@
 
   function launch() {
     const start = window.scrollY;
-    if (start <= 0) return;
+    const end = getTargetY();
+    const distance = start - end;
+    if (Math.abs(distance) < 2) return;
 
     if (reduceMotion) {
-      window.scrollTo({ top: 0, behavior: 'auto' });
+      window.scrollTo({ top: end, behavior: 'auto' });
       return;
     }
 
@@ -64,14 +75,14 @@
     const previousBehavior = document.documentElement.style.scrollBehavior;
     document.documentElement.style.scrollBehavior = 'auto';
 
-    const duration = Math.min(1100, Math.max(500, start * 0.55));
+    const duration = Math.min(1100, Math.max(500, Math.abs(distance) * 0.55));
     const startTime = performance.now();
 
     function step(now) {
       const elapsed = now - startTime;
       const t = Math.min(1, elapsed / duration);
       const eased = easeOutExpo(t);
-      window.scrollTo(0, Math.round(start * (1 - eased)));
+      window.scrollTo(0, Math.round(start - distance * eased));
 
       if (t < 1) {
         requestAnimationFrame(step);
