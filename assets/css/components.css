@@ -694,3 +694,98 @@
     transform: none !important;
   }
 }
+
+/* ---------- Back to top — "slingshot" ---------- */
+.back-to-top {
+  position: fixed;
+  right: clamp(1rem, 3vw, 2rem);
+  bottom: calc(clamp(1rem, 3vw, 2rem) + 70px);
+  z-index: 150;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: var(--slate-900);
+  border: 1px solid var(--line-on-dark);
+  color: var(--gold-400);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(14px) scale(0.85);
+  transition:
+    opacity 0.35s var(--ease-out),
+    visibility 0.35s,
+    transform 0.35s var(--ease-out),
+    border-color 0.2s var(--ease-out),
+    background 0.2s var(--ease-out);
+  box-shadow: 0 10px 26px -10px rgba(20, 27, 34, 0.5);
+}
+.back-to-top.is-visible { opacity: 1; visibility: visible; transform: translateY(0) scale(1); }
+.back-to-top:hover { border-color: var(--gold-400); background: var(--slate-800); }
+
+/* Pulling the sling back: press and hold nudges it down + squeezes it */
+.back-to-top.is-armed {
+  transform: translateY(9px) scale(0.92, 0.96);
+  transition-duration: 0.15s;
+}
+.back-to-top.is-armed .back-to-top__arrow { transform: translateY(3px); }
+
+.back-to-top__ring {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+.back-to-top__ring-bg { fill: none; stroke: var(--line-on-dark); stroke-width: 2; }
+.back-to-top__ring-fg {
+  fill: none;
+  stroke: var(--gold-500);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-dasharray: 119.4;
+  stroke-dashoffset: 119.4;
+  transition: stroke-dashoffset 0.1s linear;
+}
+
+.back-to-top__arrow {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  transition: transform 0.2s var(--ease-out);
+}
+
+/* Release: arrow shoots up and out of frame, a fresh one drops back into place */
+.back-to-top.is-launching .back-to-top__arrow {
+  animation: arrowLaunch 0.5s var(--ease-out) forwards;
+}
+@keyframes arrowLaunch {
+  0%   { transform: translateY(0); opacity: 1; }
+  38%  { transform: translateY(-16px); opacity: 0; }
+  39%  { transform: translateY(16px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+/* Landing: a quick elastic overshoot on arrival back at the top */
+.back-to-top.is-landed { animation: landBounce 0.45s var(--ease-out); }
+@keyframes landBounce {
+  0%   { transform: scale(1); }
+  35%  { transform: scale(1.18); }
+  62%  { transform: scale(0.93); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 560px) {
+  .back-to-top { bottom: calc(1rem + 60px); width: 46px; height: 46px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .back-to-top,
+  .back-to-top__arrow {
+    transition: opacity 0.2s ease, visibility 0.2s ease !important;
+    animation: none !important;
+    transform: none !important;
+  }
+}
