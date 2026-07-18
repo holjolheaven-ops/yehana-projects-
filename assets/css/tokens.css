@@ -1,0 +1,81 @@
+/* ==========================================================================
+   YEHANA PROJECTS — Design Tokens
+   Palette: Slate / Gold / Professional Gray
+   Signature motif: site-survey crosshairs + blueprint grid
+   ========================================================================== */
+
+:root {
+  /* ---- Color: Slate ---- */
+  --slate-950: #141B22;
+  --slate-900: #1C2530;
+  --slate-800: #263241;
+  --slate-700: #354453;
+  --slate-600: #4A5A6A;
+
+  /* ---- Color: Gold (muted brass, not bright) ---- */
+  --gold-600: #A47638;
+  --gold-500: #B8894F;
+  --gold-400: #C9A15F;
+  --gold-300: #DCBD8C;
+  --gold-100: #F0E4D0;
+
+  /* ---- Color: Professional Gray ---- */
+  --gray-50:  #F4F5F3;
+  --gray-100: #E9EBE7;
+  --gray-200: #DBDED9;
+  --gray-400: #9AA3A0;
+  --gray-600: #667079;
+  --gray-800: #38424B;
+
+  --ink: #13181D;
+  --white: #FFFFFF;
+
+  /* ---- Semantic ---- */
+  --bg-page: var(--gray-50);
+  --bg-panel: var(--white);
+  --bg-dark: var(--slate-900);
+  --bg-dark-alt: var(--slate-800);
+  --text-body: var(--gray-800);
+  --text-muted: var(--gray-600);
+  --text-on-dark: var(--gray-100);
+  --text-on-dark-muted: #9CA9B3;
+  --accent: var(--gold-500);
+  --accent-strong: var(--gold-600);
+  --line: var(--gray-200);
+  --line-on-dark: rgba(240, 228, 208, 0.18);
+
+  /* ---- Type ---- */
+  --font-display: 'Fraunces', 'Georgia', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', 'SFMono-Regular', Consolas, monospace;
+
+  --fs-display-xl: clamp(2.75rem, 2rem + 3.2vw, 5rem);
+  --fs-display-lg: clamp(2.1rem, 1.7rem + 1.8vw, 3.4rem);
+  --fs-display-md: clamp(1.6rem, 1.4rem + 0.9vw, 2.25rem);
+  --fs-body-lg: clamp(1.05rem, 1rem + 0.2vw, 1.2rem);
+  --fs-body: 1rem;
+  --fs-small: 0.875rem;
+  --fs-micro: 0.75rem;
+
+  /* ---- Spacing ---- */
+  --space-3xs: 0.25rem;
+  --space-2xs: 0.5rem;
+  --space-xs: 0.75rem;
+  --space-sm: 1rem;
+  --space-md: 1.5rem;
+  --space-lg: 2.5rem;
+  --space-xl: 4rem;
+  --space-2xl: clamp(4rem, 3rem + 4vw, 7rem);
+  --space-3xl: clamp(6rem, 4.5rem + 6vw, 10rem);
+
+  --section-pad-y: var(--space-3xl);
+  --container-w: 1240px;
+  --container-pad: clamp(1.25rem, 4vw, 3rem);
+
+  --radius-sm: 3px;
+  --radius-md: 6px;
+
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-fast: 180ms;
+  --dur-med: 420ms;
+}
